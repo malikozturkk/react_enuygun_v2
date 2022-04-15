@@ -34,11 +34,11 @@ import axios from "axios";
                         <div className="footerContainer">
                             <div className="footer-top">
                                 <a className="header-logo" href="https://www.enuygun.com"><Icons/></a>
-                                <div class="footer-social">
-                                    <div class="footer-social-title">
+                                <div className="footer-social">
+                                    <div className="footer-social-title">
                                         Bizi takip edin:
                                     </div>
-                                    <div class="footer-social-links">
+                                    <div className="footer-social-links">
                                     <a href="https://www.facebook.com/enuygun" target="_blank" title="Facebook" className="footer-social-icons">
                                         <Facebook/>
                                     </a>
@@ -59,12 +59,12 @@ import axios from "axios";
                             </div>
                             <hr></hr>
                             <div className="footer-menu">
-                                {this.state.datas.map(data => 
-                                    <div className="col">
+                                {this.state.datas.map((data, index) => 
+                                    <div className="col" key={index}>
                                     <a href={data.link} className="footer-menu-toggler links">{data.name}</a>
                                     <div className="footer-menu-collapse collapse">
-                                            {data.items.map(item => 
-                                                <ul className="footer-menu-list">
+                                            {data.items.map((item, id) => 
+                                                <ul className="footer-menu-list" key={id}>
                                                     <li>
                                                         <a className="links" href={item.link}>{item.name}</a>
                                                     </li>
@@ -76,50 +76,50 @@ import axios from "axios";
                                     )}
                             </div>
                             
-                            <hr class="hidden-md-up"></hr>
+                            <hr className="hidden-md-up"></hr>
 
-                            <div class="footer-bottom">
-                                <div class="footer-iata">
-                                    <div class="footer-iata-text">Enuygun.com IATA üyesidir. "8821943"</div>
+                            <div className="footer-bottom">
+                                <div className="footer-iata">
+                                    <div className="footer-iata-text">Enuygun.com IATA üyesidir. "8821943"</div>
                                 </div>
 
-                                <div class="footer-lang">
-                                    <div class="footer-nav">
+                                <div className="footer-lang">
+                                    <div className="footer-nav">
                                         <a href="https://www.wingie.com/" title="Wingie.com" rel="alternate" className="footer-bottom-links"> 
-                                            <span class="footer-nav-text">Wingie.com</span>
+                                            <span className="footer-nav-text">Wingie.com</span>
                                         </a>
 
                                         <a href="https://www.wingie.co.uk/" title="Wingie.co.uk" rel="alternate" className="footer-bottom-links">
-                                            <span class="footer-nav-text">Wingie.co.uk</span>
+                                            <span className="footer-nav-text">Wingie.co.uk</span>
                                         </a>
 
                                         <a href="https://www.wingie.de/" title="Wingie.de" rel="alternate" className="footer-bottom-links">
-                                            <span class="footer-nav-text">Wingie.de</span>
+                                            <span className="footer-nav-text">Wingie.de</span>
                                         </a>
 
                                         <a href="https://www.wingie.es/" title="Wingie.es" rel="alternate" className="footer-bottom-links"> 
-                                            <span class="footer-nav-text">Wingie.es</span>
+                                            <span className="footer-nav-text">Wingie.es</span>
                                         </a>
 
                                         <a href="https://www.wingie.ae/" title="Wingie.ae" rel="alternate" className="footer-bottom-links">
-                                            <span class="footer-nav-text">Wingie.ae</span>
+                                            <span className="footer-nav-text">Wingie.ae</span>
                                         </a>
 
                                         <a href="https://ru.wingie.com/" title="ru.wingie.com" rel="alternate" className="footer-bottom-links">
-                                            <span class="footer-nav-text">ru.wingie.com</span>
+                                            <span className="footer-nav-text">ru.wingie.com</span>
                                         </a>
 
                                         <a href="https://sa.wingie.com/" title="sa.wingie.com" rel="alternate" className="footer-bottom-links">
-                                            <span class="footer-nav-text">sa.wingie.com</span>
+                                            <span className="footer-nav-text">sa.wingie.com</span>
                                         </a>
 
                                         <a href="https://eg.wingie.com/" title="eg.wingie.com" rel="alternate" className="footer-bottom-links">
-                                            <span class="footer-nav-text">eg.wingie.com</span>
+                                            <span className="footer-nav-text">eg.wingie.com</span>
                                         </a>
                                     </div>
                                 </div>
 
-                                <div class="footer-copyright">
+                                <div className="footer-copyright">
                                     <small>© 2008 - 2022 Tüm hakları saklıdır. Enuygun.com | Enuygun Seyahat, Belge No: 7153</small>
                                 </div>
                                 

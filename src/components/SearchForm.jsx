@@ -34,34 +34,34 @@ const SearchForm = () => {
                     <ul className="nav nav-tabs" id="jumbotron-tab">
                         <TabList>       
                             <Tab>
-                                <li className="nav-item">
+                                <span className="nav-item">
                                     <a href="#" className="nav-link">Uçak Bileti</a>
-                                </li>
+                                </span>
                             </Tab>
                             <Tab>
-                                <li className="nav-item">
+                                <span className="nav-item">
                                     <a href="#" className="nav-link">Çoklu Uçuş</a>
-                                </li>
+                                </span>
                             </Tab>
                             <Tab>
-                                <li className="nav-item">
+                                <span className="nav-item">
                                     <a href="#" className="nav-link">Check-in</a>
-                                </li>
+                                </span>
                             </Tab>
                             <Tab>
-                                <li className="nav-item">
+                                <span className="nav-item">
                                     <a href="#" className="nav-link">PNR Sorgulama</a>
-                                </li>
+                                </span>
                             </Tab>
                             <Tab>
-                                <li className="nav-item">
+                                <span className="nav-item">
                                     <a href="#" className="nav-link">Bilet İptal</a>
-                                </li>
+                                </span>
                             </Tab>
                             
-                                <li className="nav-item">
+                                <span className="nav-item">
                                     <a href="https://www.enuygun.com/arac-kiralama/" className="nav-link" target="_blank">Araç Kiralama</a>
-                                </li>
+                                </span>
                             
                         </TabList>
                     </ul>
@@ -72,7 +72,7 @@ const SearchForm = () => {
                                 <form id="FlightSearchForm">
                                     <div className="SearchFormRow">
                                         <div className="FlightSearchFormCol">
-                                            <label className="OriginLabel" for="OriginLabel">Nereden</label>
+                                            <label className="OriginLabel" htmlFor="OriginLabel">Nereden</label>
                                             <div className="SearchFormInput">
                                                 <input type="text" placeholder="Şehir veya Havalimanı Yazın" className="OriginInput" id="OriginLabel"></input>
                                             </div>
@@ -91,7 +91,7 @@ const SearchForm = () => {
                                             </button>
                                         </div>
                                         <div className="FlightSearchFormCol">
-                                            <label className="DestinationLabel" for="DestinationLabel">Nereye</label>
+                                            <label className="DestinationLabel" htmlFor="DestinationLabel">Nereye</label>
                                             <div className="SearchFormInput">
                                                 <input type="text" placeholder="Şehir veya Havalimanı Yazın" className="DestinationInput" id="DestinationLabel"></input>
                                             </div>
@@ -147,14 +147,14 @@ const SearchForm = () => {
                                                 <div className="InputIcon">
                                                     <SearchFormDate/>
                                                 </div>
-                                                <label className="OneWayCheckbox OriginLabel" for="oneWayCheckbox">
+                                                <label className="OneWayCheckbox OriginLabel" htmlFor="oneWayCheckbox">
                                                     <input type="checkbox" id="oneWayCheckbox" onChange={onChange} checked={activeDate}></input>Tek Yön
                                                 </label>
                                         </div>
                                     </div>
                                     <div className="SearchFormRow">
                                         <div className="FlightSearchFormCol">
-                                            <label className="OriginLabel" for="transitFilter">
+                                            <label className="OriginLabel" htmlFor="transitFilter">
                                                 <input type="checkbox" id="transitFilter"></input>Aktarmasız
                                             </label>
                                             <Dropdown className="PassengerSelectButton" options={options} value={defaultOption} placeholder="Select an option" />
@@ -173,7 +173,7 @@ const SearchForm = () => {
                                     </div>
                                     <div className="SearchFormRow">
                                         <div className="FlightSearchFormCol">
-                                            <label for="hotelSearchCheckbox"><input type="checkbox" id="hotelSearchCheckbox"></input> Bu tarihler için otelleri de listele</label>
+                                            <label htmlFor="hotelSearchCheckbox"><input type="checkbox" id="hotelSearchCheckbox"></input> Bu tarihler için otelleri de listele</label>
                                         </div>
                                     </div>
                                 </form>
@@ -190,17 +190,17 @@ const SearchForm = () => {
                     <div className="TabForm SearchForm">
                         <div className="row">
                             <div className="col-6 form-group">
-                                <label className="form-control-label" for="cancelRefund">PNR Kodu</label>
-                                <input id="cancelRefund" className="form-control" type="text" name="pnr" maxlength="9" minlength="5" required="" data-msg-minlength="Lütfen PNR numaranızı girin" data-msg-required="Lütfen PNR numaranızı girin"></input>
+                                <label className="form-control-label" htmlFor="cancelRefund">PNR Kodu</label>
+                                <input id="cancelRefund" className="form-control" type="text" name="pnr" maxLength="9" minLength="5" required="" data-msg-minlength="Lütfen PNR numaranızı girin" data-msg-required="Lütfen PNR numaranızı girin"></input>
                             </div>
                             <div className="col-6 form-group mb-3">
-                                <label className="form-control-label" for="ModalCompleteReservationLastname2">Yolcunun Soyadı</label>
+                                <label className="form-control-label" htmlFor="ModalCompleteReservationLastname2">Yolcunun Soyadı</label>
                                 <input id="ModalCompleteReservationLastname2" className="form-control" type="text" name="lastname" required="" data-msg-required="Lütfen soyadınızı girin"></input>
                             </div>
                         </div>
                         <div className="row CheckIn">
                             <div className="col-6 form-group">
-                                <label for="ModalOnlineCheckInLastname" className="form-control-label">Yolcunun Soyadı</label>
+                                <label htmlFor="ModalOnlineCheckInLastname" className="form-control-label">Yolcunun Soyadı</label>
                                 <input id="ModalOnlineCheckInLastname" className="form-control" type="text" name="lastname" required="" data-msg-required="Lütfen isim ve soyisim bilgilerinizi kimlik ya da pasaportunuzda yazıldığı gibi Türkçe veya İngilizce karakterler kullanarak girin."></input>
                             </div>
                             <div className="col-6 form-group">
@@ -214,11 +214,11 @@ const SearchForm = () => {
                     <div className="TabForm SearchForm">
                         <div className="row">
                             <div className="col-6 form-group">
-                                <label className="form-control-label" for="cancelRefund">PNR Kodu</label>
-                                <input id="cancelRefund" className="form-control" type="text" name="pnr" maxlength="9" minlength="5" required="" data-msg-minlength="Lütfen PNR numaranızı girin" data-msg-required="Lütfen PNR numaranızı girin"></input>
+                                <label className="form-control-label" htmlFor="cancelRefund">PNR Kodu</label>
+                                <input id="cancelRefund" className="form-control" type="text" name="pnr" maxLength="9" minLength="5" required="" data-msg-minlength="Lütfen PNR numaranızı girin" data-msg-required="Lütfen PNR numaranızı girin"></input>
                             </div>
                             <div className="col-6 form-group mb-3">
-                                <label className="form-control-label" for="ModalCompleteReservationLastname2">Yolcunun Soyadı</label>
+                                <label className="form-control-label" htmlFor="ModalCompleteReservationLastname2">Yolcunun Soyadı</label>
                                 <input id="ModalCompleteReservationLastname2" className="form-control" type="text" name="lastname" required="" data-msg-required="Lütfen soyadınızı girin"></input>
                             </div>
                         </div>
@@ -236,11 +236,11 @@ const SearchForm = () => {
                     <div className="TabForm SearchForm">
                         <div className="row">
                             <div className="col-6 form-group">
-                                <label className="form-control-label" for="cancelRefund">PNR Kodu</label>
-                                <input id="cancelRefund" className="form-control" type="text" name="pnr" maxlength="9" minlength="5" required="" data-msg-minlength="Lütfen PNR numaranızı girin" data-msg-required="Lütfen PNR numaranızı girin"></input>
+                                <label className="form-control-label" htmlFor="cancelRefund">PNR Kodu</label>
+                                <input id="cancelRefund" className="form-control" type="text" name="pnr" maxLength="9" minLength="5" required="" data-msg-minlength="Lütfen PNR numaranızı girin" data-msg-required="Lütfen PNR numaranızı girin"></input>
                             </div>
                             <div className="col-6 form-group mb-3">
-                                <label className="form-control-label" for="ModalCompleteReservationLastname2">Yolcunun Soyadı</label>
+                                <label className="form-control-label" htmlFor="ModalCompleteReservationLastname2">Yolcunun Soyadı</label>
                                 <input id="ModalCompleteReservationLastname2" className="form-control" type="text" name="lastname" required="" data-msg-required="Lütfen soyadınızı girin"></input>
                             </div>
                         </div>
