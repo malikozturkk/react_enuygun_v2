@@ -134,7 +134,7 @@ const SearchForm = () => {
                                                             selected={finishDate}
                                                             onChange={(date) => setFinishDate(date)}
                                                             placeholderText="Tek Yön"
-                                                            // yorum satırından kaldırırsan disabled olur. disabled
+                                                            
                                                         />
                                                     </div>
                                                 </div>
