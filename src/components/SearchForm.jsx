@@ -18,10 +18,14 @@ import BtnIcons from "../assets/icons/BtnIcons";
 const SearchForm = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [finishDate, setFinishDate] = useState(new Date());
+    const [activeDate, setActiveDate] = useState(true)
     const options = [
         'Yetişkin', 'Çocuk (2- 12 Yaş Arası)', 'Bebek (0 - 2 Yaş Arası)', '65 yaş üstü', 'Öğrenci (12 - 24 Yaş Arası)'
       ];
       const defaultOption = options[0];
+      const onChange = () => {
+          setActiveDate(!activeDate)
+      }
     return (
         <div className="JumbotronMain">
             <div className="Container">
@@ -103,14 +107,16 @@ const SearchForm = () => {
                                                 <div className="SingleDatePickerInput">
                                                     <div className="DateFormInput">
                                                         <DatePicker 
-                                                            minDate={new Date()} 
-                                                            maxDate={finishDate} 
+                                                            minDate={new Date()}  
                                                             locale={tr} 
                                                             monthsShown={2} 
                                                             dateFormat="dd MMM yyyy," 
                                                             className="DateInput" 
                                                             selected={startDate} 
-                                                            onChange={(date) => setStartDate(date)} 
+                                                            onChange={(date) => {
+                                                                setStartDate(date)
+                                                                setFinishDate(date)                  
+                                                              }}
                                                         />
                                                     </div>
                                                 </div>
@@ -124,17 +130,16 @@ const SearchForm = () => {
                                             <label className="ReturnLabel">Dönüş Tarihi</label>
                                             <div className="DateForm">
                                                 <div className="SingleDatePickerInput">
-                                                    <div className="DateFormInput">
+                                                    <div className="DateFormInput" onClick={() => setActiveDate(false)}>
                                                         <DatePicker 
+                                                            className={`DateInput ReturnDateInput ${activeDate ? "activeDate" : ""}`}
+                                                            disabled = {activeDate}
                                                             minDate={startDate}
                                                             locale={tr}
                                                             monthsShown={2}
                                                             dateFormat="dd MMM yyyy,"
-                                                            className="DateInput ReturnDateInput"
                                                             selected={finishDate}
                                                             onChange={(date) => setFinishDate(date)}
-                                                            placeholderText="Tek Yön"
-                                                            
                                                         />
                                                     </div>
                                                 </div>
@@ -143,7 +148,7 @@ const SearchForm = () => {
                                                     <SearchFormDate/>
                                                 </div>
                                                 <label className="OneWayCheckbox OriginLabel" for="oneWayCheckbox">
-                                                    <input type="checkbox" id="oneWayCheckbox"></input>Tek Yön
+                                                    <input type="checkbox" id="oneWayCheckbox" onChange={onChange} checked={activeDate}></input>Tek Yön
                                                 </label>
                                         </div>
                                     </div>

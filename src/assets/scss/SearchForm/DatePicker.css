@@ -54,3 +54,6 @@
     background-color: initial!important;
     color: black!important;
 }
+.activeDate {
+    opacity: .4;
+}
