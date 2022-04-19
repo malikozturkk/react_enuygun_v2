@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/scss/SearchForm/SearchForm.css"
 import "../assets/scss/SearchForm/DatePicker.css"
 import "../assets/scss/SearchForm/ReactTabs.css"
 import "../assets/scss/SearchForm/Dropdown.css"
+import "../assets/scss/SearchForm/AutoComplete.css"
 import 'react-tabs/style/react-tabs.css';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-dropdown/style.css';
@@ -16,7 +17,36 @@ import SearchFormDate from "../assets/icons/SearchFormDate";
 import SearchFormPassenger from "../assets/icons/SearchFormPassenger";
 import BtnIcons from "../assets/icons/BtnIcons";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+
 const SearchForm = () => {
+    const [users, setUsers] = useState([])
+    const [text, setText] = useState('')
+    const [suggestions, setSuggestions] = useState([])
+    useEffect (() => {
+        const loadUsers = async()=>{
+            const response = await axios.get('https://reqres.in/api/users');
+            setUsers(response.data.data)
+        }
+        loadUsers();
+
+    }, [])
+    const onSuggestHandler = (text)=>{
+        setText(text);
+        setSuggestions([])
+    }
+    const onChangeHandler = (text)=>{
+        let matches = []
+        if (text.length > 0) {
+            matches = users.filter(user => {
+                const regex = new RegExp(`${text}`,"gi");
+                return user.email.match(regex)
+            })
+        }
+        console.log(matches)
+        setSuggestions(matches)
+        setText(text)
+    }
     const [startDate, setStartDate] = useState(new Date());
     const [finishDate, setFinishDate] = useState(new Date());
     const [activeDate, setActiveDate] = useState(true)
@@ -75,7 +105,21 @@ const SearchForm = () => {
                                         <div className="FlightSearchFormCol">
                                             <label className="OriginLabel" htmlFor="OriginLabel">Nereden</label>
                                             <div className="SearchFormInput">
-                                                <input type="text" placeholder="Şehir veya Havalimanı Yazın" className="OriginInput" id="OriginLabel" required=""></input>
+                                                <input type="text" placeholder="Şehir veya Havalimanı Yazın" className="OriginInput" id="OriginLabel" required="" onChange={e => onChangeHandler(e.target.value)} value={text} 
+                                                onBlur={() => {
+                                                    setTimeout(() => {
+                                                        setSuggestions([])
+                                                        }, 100);
+                                                        }}
+                                                        ></input>
+                                                {suggestions && suggestions.map((suggestion, i) =>
+                                                    <div 
+                                                    key={i} 
+                                                    className="suggestion" 
+                                                    onClick={()=>onSuggestHandler(suggestion.email)}>
+                                                        {suggestion.email}
+                                                    </div>
+                                                )}
                                             </div>
                                             <div className="InputIcon">
                                                 <SearchFormTarget/>
