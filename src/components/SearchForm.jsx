@@ -15,6 +15,7 @@ import SearchFormDestination from "../assets/icons/SearchFormDestination";
 import SearchFormDate from "../assets/icons/SearchFormDate";
 import SearchFormPassenger from "../assets/icons/SearchFormPassenger";
 import BtnIcons from "../assets/icons/BtnIcons";
+import { Link } from "react-router-dom";
 const SearchForm = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [finishDate, setFinishDate] = useState(new Date());
@@ -74,7 +75,7 @@ const SearchForm = () => {
                                         <div className="FlightSearchFormCol">
                                             <label className="OriginLabel" htmlFor="OriginLabel">Nereden</label>
                                             <div className="SearchFormInput">
-                                                <input type="text" placeholder="Şehir veya Havalimanı Yazın" className="OriginInput" id="OriginLabel"></input>
+                                                <input type="text" placeholder="Şehir veya Havalimanı Yazın" className="OriginInput" id="OriginLabel" required=""></input>
                                             </div>
                                             <div className="InputIcon">
                                                 <SearchFormTarget/>
@@ -93,7 +94,7 @@ const SearchForm = () => {
                                         <div className="FlightSearchFormCol">
                                             <label className="DestinationLabel" htmlFor="DestinationLabel">Nereye</label>
                                             <div className="SearchFormInput">
-                                                <input type="text" placeholder="Şehir veya Havalimanı Yazın" className="DestinationInput" id="DestinationLabel"></input>
+                                                <input type="text" placeholder="Şehir veya Havalimanı Yazın" className="DestinationInput" id="DestinationLabel" required=""></input>
                                             </div>
                                             <div className="InputIcon">
                                                 <SearchFormDestination/>
@@ -163,12 +164,14 @@ const SearchForm = () => {
                                             </div>
                                         </div>
                                         <div className="FlightSearchFormCol">
-                                            <button className="PrimaryBtn" type="button">
-                                                <span>Ucuz bilet bul</span>
-                                                <span className="SvgIcon DirectionIcon">
-                                                    <BtnIcons/>
-                                                </span>
-                                            </button>
+                                            <Link to="/search">
+                                                <button className="PrimaryBtn" type="button">
+                                                    <span>Ucuz bilet bul</span>
+                                                    <span className="SvgIcon DirectionIcon">
+                                                        <BtnIcons/>
+                                                    </span>
+                                                </button>
+                                            </Link>
                                         </div>
                                     </div>
                                     <div className="SearchFormRow">

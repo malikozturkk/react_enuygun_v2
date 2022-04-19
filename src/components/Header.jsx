@@ -3,6 +3,7 @@ import Dropdown from "./Dropdown";
 import Icons from "../assets/icons/Icons";
 import { PropTypes } from 'prop-types';
 import { Component } from 'react';
+import { Link } from "react-router-dom";
 //import Data from '../assets/data.json'
 
 class Header extends Component {
@@ -41,11 +42,21 @@ class Header extends Component {
         )} */}
         <nav>
           <div className="Container">
-            <a className="header-logo" href="https://www.enuygun.com"><Icons /></a>
-            <a className="header-items active" href="https://www.enuygun.com/ucak-bileti">{first}</a>
-            <a className="header-items passive" href="https://www.enuygun.com/otobus-bileti">{second}</a>
-            <a className="header-items passive" href="https://www.enuygun.com/otel">{third}</a>
-            <a className="header-items passive" href="https://www.enuygun.com/ucak-bileti/sikca-sorulan-sorular/">{fourth}</a>
+            <Link to="/" className="header-logo">
+              <Icons />
+            </Link>
+            <Link to="/" className="header-items active">
+              {first}
+            </Link>
+            <Link to="/otobus-bileti" className="header-items passive">
+              {second}
+            </Link>
+            <Link to="/otel" className="header-items passive">
+              {third}
+            </Link>
+            <Link to="/yardim" className="header-items passive">
+              {fourth}
+            </Link>
             <a className="dot" href="#" onClick={this.showHideDropdown.bind(this)}>
               ...
               {
