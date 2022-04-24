@@ -70,19 +70,6 @@
 .SearchFormInput {
     position: relative;
 }
-.OriginInput, .DestinationInput {
-    width: 100%;
-    font-size: 14px;
-    font-weight: 400;
-    box-sizing: border-box;
-    padding: 11px 30px 11px 10px;
-    line-height: 1rem;
-    border: 1px solid #e2e2e2;
-    border-radius: 4px;
-    background-color: #fff;
-    outline: 0;
-    color: inherit;
-}
 .InputIcon {
     position: absolute;
     right: 20px;
