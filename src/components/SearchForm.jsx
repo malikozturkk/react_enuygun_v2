@@ -17,19 +17,37 @@ import SearchFormDate from "../assets/icons/SearchFormDate";
 import SearchFormPassenger from "../assets/icons/SearchFormPassenger";
 import BtnIcons from "../assets/icons/BtnIcons";
 import { Link } from "react-router-dom";
-import AutoSuggest from './autoSuggest'
+import DepartureAutoSuggest from './departureAutoSuggest'
+import ReturnAutoSuggest from './returnAutoSuggest'
 
 const SearchForm = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [finishDate, setFinishDate] = useState(new Date());
     const [activeDate, setActiveDate] = useState(true)
-    const options = [
+    
+    const persons = [
         'Yetişkin', 'Çocuk (2- 12 Yaş Arası)', 'Bebek (0 - 2 Yaş Arası)', '65 yaş üstü', 'Öğrenci (12 - 24 Yaş Arası)'
       ];
-      const defaultOption = options[0];
+    
+    const [person, setPerson] = useState('Yetişkin');
+
+      const defaultOption = persons[0];
       const onChange = () => {
           setActiveDate(!activeDate)
       }
+    const returnDate = activeDate ? 'Tek Yön' : finishDate
+
+
+    const flightDate = {
+        departure_date: {startDate},
+        return_date: {returnDate}
+    }
+     window.localStorage.setItem('flightDate', JSON.stringify(flightDate));
+
+     const passengerType = {
+        passenger_type: {person}
+    }
+     window.localStorage.setItem('passengerType', JSON.stringify(passengerType));
     return (
         <div className="JumbotronMain">
             <div className="Container">
@@ -78,7 +96,7 @@ const SearchForm = () => {
                                         <div className="FlightSearchFormCol">
                                             <label className="OriginLabel" htmlFor="OriginLabel">Nereden</label>
                                             <div className="SearchFormInput">
-                                                <AutoSuggest />
+                                                <DepartureAutoSuggest />
                                             </div>
                                             <div className="InputIcon">
                                                 <SearchFormTarget/>
@@ -97,7 +115,7 @@ const SearchForm = () => {
                                         <div className="FlightSearchFormCol">
                                             <label className="DestinationLabel" htmlFor="DestinationLabel">Nereye</label>
                                             <div className="SearchFormInput">
-                                                <AutoSuggest />
+                                                <ReturnAutoSuggest />
                                             </div>
                                             <div className="InputIcon">
                                                 <SearchFormDestination/>
@@ -138,6 +156,7 @@ const SearchForm = () => {
                                                         <DatePicker 
                                                             className={`DateInput ReturnDateInput ${activeDate ? "activeDate" : ""}`}
                                                             disabled = {activeDate}
+                                                            value= {activeDate ? 'Tek Yön' : activeDate}
                                                             minDate={startDate}
                                                             locale={tr}
                                                             monthsShown={2}
@@ -161,7 +180,7 @@ const SearchForm = () => {
                                             <label className="OriginLabel" htmlFor="transitFilter">
                                                 <input type="checkbox" id="transitFilter"></input>Aktarmasız
                                             </label>
-                                            <Dropdown className="PassengerSelectButton" options={options} value={defaultOption} placeholder="Select an option" />
+                                            <Dropdown className="PassengerSelectButton" options={persons} onChange={e => setPerson(e.value)} value={defaultOption} placeholder="Select an option" />
                                             <div className="InputIcon">
                                                 <SearchFormPassenger/>
                                             </div>

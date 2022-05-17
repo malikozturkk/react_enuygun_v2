@@ -1,6 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
+  "proxy": "https://www.enuygun.com",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
@@ -9,6 +10,8 @@
     "@types/react-tabs": "^2.3.4",
     "autosuggest-highlight": "^3.2.1",
     "axios": "^0.26.1",
+    "dateformat": "^5.0.3",
+    "dayjs": "^1.11.2",
     "react": "^17.0.2",
     "react-autosuggest": "^10.1.0",
     "react-datepicker": "^4.7.0",

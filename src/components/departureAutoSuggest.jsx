@@ -1,53 +1,36 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import "../assets/scss/SearchForm/autoSuggest.css"
+import axios from "axios";
 // Otomatik olarak önermek istediğiniz dillerin bir listesinin olduğunu hayal edin.
-const languages = [
-  {
-    name: 'Istanbul',
-    code: 'IST'
-  },
-  {
-    name: 'Ankara',
-    code: 'ANK'
-  },
-  {
-    name: 'Kars',
-    code: 'KS'
-  },
-  {
-    name: 'Antalya',
-    code: 'AYT'
-  },
-];
-
 
 // Otomatik Öneri'ye verilen herhangi bir giriş değeri için önerilerin nasıl hesaplanacağını öğretin.
-const getSuggestions = value => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-
-  return inputLength === 0 ? [] : languages.filter(lang =>
-    lang.name.toLowerCase().slice(0, inputLength) === inputValue
-  );
-};
 
 // Öneri tıklandığında, Otomatik Önerinin girişi doldurması gerekir
 // tıklanan öneriye göre. Otomatik Öneri'ye nasıl hesaplanacağını öğretin.
 // verilen her öneri için giriş değeri.
-const getSuggestionValue = suggestion => suggestion.name;
-
+const getSuggestionValue = suggestion => suggestion.label;
 // Use your imagination to render suggestions.
+
+
 const renderSuggestion = suggestion => (
   <div className='suggestion_item'>
         <div className='city_info'>
-            {suggestion.name}
+            {suggestion.label}
         </div>
         <div className='city_code'>
-            {suggestion.code}
+            {suggestion.id}
         </div>
   </div>
 );
+const getSuggestions = value => {
+  const inputValue = value.trim().toLowerCase();
+  const inputLength = inputValue.length;
+
+  return inputLength === 0 ? [] : value.filter(lang =>
+    lang.label.toLowerCase().slice(0, inputLength) === inputValue
+  );
+};
 
 class autoSuggest extends React.Component {
   constructor() {
@@ -64,19 +47,32 @@ class autoSuggest extends React.Component {
     };
   }
 
-  onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue
-    });
-  };
-
-    // Autosuggest, önerileri her güncellemeniz gerektiğinde bu işlevi çağırır.
-    // Bu mantığı yukarıda zaten uyguladınız, bu yüzden sadece kullanın.
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
       suggestions: getSuggestions(value)
     });
   };
+
+  onChange = async (event, { newValue }) => {
+    this.setState({
+      value: newValue
+    });
+    if(newValue.length >= 3){ //length 3 ten büyükse arama yap. 
+      axios.post(`/ucak-bileti/trip-autocomplete/?term=${newValue}`,{
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
+      }}).then(value => {
+        this.setState({
+          suggestions: value.data
+        });
+      })
+    }
+  };
+
+    // Autosuggest, önerileri her güncellemeniz gerektiğinde bu işlevi çağırır.
+    // Bu mantığı yukarıda zaten uyguladınız, bu yüzden sadece kullanın.
 
   // Otomatik öneri, önerileri her temizlemeniz gerektiğinde bu işlevi çağırır.
   onSuggestionsClearRequested = () => {
@@ -94,6 +90,11 @@ class autoSuggest extends React.Component {
       value,
       onChange: this.onChange
     };
+
+    const departureAirport = {
+        departure_airport_name: {value},
+    }
+    window.localStorage.setItem('departureAirport', JSON.stringify(departureAirport));
 
     // Son olarak, render edin!
     return (
